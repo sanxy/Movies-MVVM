@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_favorite"
+    app:startDestination="@id/nav_favorite">
+
+    <fragment
+        android:id="@+id/nav_favorite"
+        android:name="com.sanxynet.movie_mvvm.ui.home.FavoriteFragment"
+        android:label="@string/favorite_movies"
+        tools:layout="@layout/fragment_movie_list">
+
+        <action
+            android:id="@+id/navigateToMovieDetails"
+            app:destination="@id/nav_movie_detail"/>
+
+    </fragment>
+
+    <activity
+        android:id="@+id/nav_movie_detail"
+        android:name="com.sanxynet.movie_mvvm.ui.details.MovieDetailsActivity">
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
+
+        <argument
+            android:name="poster_path"
+            app:argType="string"/>
+
+    </activity>
+
+</navigation>

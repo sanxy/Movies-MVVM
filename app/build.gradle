@@ -1,0 +1,83 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+//    System.out.println("Global:::: "+globalConfiguration["minSdkVersion"])
+
+    compileSdk globalConfiguration["compileSdkVersion"]
+
+    defaultConfig {
+        applicationId "com.sanxynet.movie_mvvm"
+        minSdk globalConfiguration["minSdkVersion"]
+        targetSdk globalConfiguration["targetSdkVersion"]
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // Enabling multidex support
+        multiDexEnabled true
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    def appDependencies = rootProject.ext.appDependencies
+    def appTestDependencies = rootProject.ext.appTestDependencies
+
+    implementation project(':data')
+    implementation project(':domain')
+    implementation project(':model')
+
+    implementation appDependencies.kotlin
+    implementation appDependencies.kotlinKtx
+    implementation appDependencies.multidex
+
+    implementation appDependencies.javaxAnnotation
+    implementation appDependencies.javaxInject
+    implementation appDependencies.rxKotlin
+    implementation appDependencies.rxAndroid
+
+    implementation appDependencies.coroutines
+    implementation appDependencies.coroutinesAndroid
+
+    implementation appDependencies.koinAndroid
+
+    implementation appDependencies.navigationFragment
+    implementation appDependencies.navigationUi
+
+    implementation appDependencies.appCompat
+    implementation appDependencies.material
+    implementation appDependencies.constraintLayout
+    implementation appDependencies.glide
+    implementation appDependencies.palette
+    implementation appDependencies.threeTen
+    implementation appDependencies.swipeRefreshLayout
+    implementation appDependencies.timber
+
+    testImplementation appTestDependencies.jUnit
+    androidTestImplementation appTestDependencies.jUnitAndroidX
+    androidTestImplementation appTestDependencies.espresso
+}
